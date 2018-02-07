@@ -1,4 +1,7 @@
 db.sqlite3
 geckodriver.log
-virtualenv"__pycache__"  
-"*.pyc"  
+virtualenv
+__pycache__  
+*.pyc
+*.sublime-workspace
+*.sublime-project
