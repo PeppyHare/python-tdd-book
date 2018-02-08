@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import unittest
 
+
 class NewVisitorTest(unittest.TestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -59,6 +60,7 @@ class NewVisitorTest(unittest.TestCase):
         # She visits that URL - her to-do list is still there
 
         # Satisfied, she goes back to sleep
+
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
