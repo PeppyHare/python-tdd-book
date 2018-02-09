@@ -57,7 +57,7 @@ class NewVisitorTest(FunctionalTest):
 
         # We use a new browser session to make sure that no information of Edith's is coming from cookies etc
         self.browser.quit()
-        self.browser = webdriver.Firefox()
+        self.browser = self.get_webdriver()
 
         # Francis visits the home page. There is no sign of Edith's list
         self.browser.get(self.live_server_url)

@@ -13,9 +13,7 @@ MAX_WAIT = 3
 class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self):
-        options = Options()
-        options.add_argument("--headless")
-        self.browser = webdriver.Firefox(firefox_options=options)
+        self.browser = self.get_webdriver()
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server:
             self.live_server_url = 'http://' + staging_server
@@ -46,3 +44,10 @@ class FunctionalTest(StaticLiveServerTestCase):
                 if time.time() - start_time > MAX_WAIT:
                     raise e
                 time.sleep(0.5)
+
+    def get_webdriver(self):
+        # options = Options()
+        # options.add_argument("--headless")
+        # browser = webdriver.Firefox(firefox_options=options)
+        browser = webdriver.Remote("http://172.17.71.145:4444/wd/hub", webdriver.DesiredCapabilities.HTMLUNIT.copy())
+        return browser
