@@ -51,3 +51,6 @@ class FunctionalTest(StaticLiveServerTestCase):
         # browser = webdriver.Firefox(firefox_options=options)
         browser = webdriver.Remote("http://172.17.71.145:4444/wd/hub", webdriver.DesiredCapabilities.HTMLUNIT.copy())
         return browser
+
+    def get_item_input_box(self):
+        return self.browser.find_element_by_id('text')
