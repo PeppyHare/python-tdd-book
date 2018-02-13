@@ -11,8 +11,8 @@ import os
 
 MAX_WAIT = 3
 
-class FunctionalTest(StaticLiveServerTestCase):
 
+class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = self.get_webdriver()
         staging_server = os.environ.get('STAGING_SERVER')
@@ -50,7 +50,9 @@ class FunctionalTest(StaticLiveServerTestCase):
         # options = Options()
         # options.add_argument("--headless")
         # browser = webdriver.Firefox(firefox_options=options)
-        browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub", desired_capabilities=DesiredCapabilities.CHROME)
+        browser = webdriver.Remote(
+            command_executor="http://localhost:4444/wd/hub",
+            desired_capabilities=DesiredCapabilities.CHROME)
         return browser
 
     def get_item_input_box(self):

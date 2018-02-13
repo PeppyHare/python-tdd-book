@@ -4,7 +4,6 @@ from lists.models import Item, List
 
 
 class ListAndItemModelsTest(TestCase):
-
     def test_saving_and_retrieving_items(self):
         list_ = List()
         list_.save()

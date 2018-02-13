@@ -7,6 +7,7 @@ from lists.forms import ItemForm
 def home_page(request):
     return render(request, 'home.html', {'form': ItemForm()})
 
+
 def view_list(request, list_id):
     list_ = List.objects.get(id=list_id)
     form = ItemForm()
@@ -16,6 +17,7 @@ def view_list(request, list_id):
             Item.objects.create(text=request.POST['text'], list=list_)
             return redirect(list_)
     return render(request, 'list.html', {'list': list_, "form": form})
+
 
 def new_list(request):
     form = ItemForm(data=request.POST)
