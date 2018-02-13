@@ -6,5 +6,6 @@ __pycache__
 *.pyc
 *.sublime-workspace
 *.sublime-project
-static
 ghostdriver.log
+bootstrap
+**/jquery-*
