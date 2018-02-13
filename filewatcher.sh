@@ -5,4 +5,4 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 GPG_TTY=$(tty)
 export GPG_TTY
-filewatcher '**/*.py **/*.sh **/*.html' "bash $DIR/runtests.sh
+filewatcher '**/*.py **/*.sh **/*.html' "bash $DIR/runtests.sh"
