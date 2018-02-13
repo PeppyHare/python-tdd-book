@@ -5,6 +5,7 @@ from selenium.common.exceptions import WebDriverException
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import time
 import os
 
@@ -49,8 +50,8 @@ class FunctionalTest(StaticLiveServerTestCase):
         # options = Options()
         # options.add_argument("--headless")
         # browser = webdriver.Firefox(firefox_options=options)
-        browser = webdriver.Remote("http://172.17.71.145:4444/wd/hub", webdriver.DesiredCapabilities.HTMLUNIT.copy())
+        browser = webdriver.Remote(command_executor="http://localhost:4444/wd/hub", desired_capabilities=DesiredCapabilities.CHROME)
         return browser
 
     def get_item_input_box(self):
-        return self.browser.find_element_by_id('text')
+        return self.browser.find_element_by_id('id_text')
