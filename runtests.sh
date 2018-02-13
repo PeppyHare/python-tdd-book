@@ -18,7 +18,8 @@ startPyVenv() {
 }
 
 testSuperlists() {
-    python3.6 manage.py test lists 
+    python3.6 manage.py test lists \
+    && phantomjs lists/static/tests/runner.js lists/static/tests/tests.html
     # && python3.6 manage.py test functional_tests
 }
 
