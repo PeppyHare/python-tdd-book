@@ -1,6 +1,7 @@
 db.sqlite3
 geckodriver.log
 virtualenv
+venv
 __pycache__  
 *.pyc
 *.sublime-workspace
