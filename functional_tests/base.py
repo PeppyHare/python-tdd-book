@@ -8,6 +8,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import time
 import os
+import warnings
 
 MAX_WAIT = 3
 
@@ -48,13 +49,16 @@ class FunctionalTest(StaticLiveServerTestCase):
                 time.sleep(0.5)
 
     def get_webdriver(self):
-        # options = Options()
-        # options.add_argument("--headless")
-        # browser = webdriver.Firefox(firefox_options=options)
-        browser = webdriver.Remote(
-            command_executor="http://localhost:4444/wd/hub",
-            desired_capabilities=DesiredCapabilities.CHROME)
-        return browser
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            # options = Options()
+            # options.add_argument("--headless")
+            # browser = webdriver.PhantomJS()
+            # browser = webdriver.Firefox(firefox_options=options)
+            browser = webdriver.Remote(
+                command_executor="http://localhost:4444/wd/hub",
+                desired_capabilities=DesiredCapabilities.HTMLUNITWITHJS)
+            return browser
 
     def get_item_input_box(self):
         return self.browser.find_element_by_id('id_text')

@@ -3,6 +3,7 @@
 from .base import FunctionalTest
 from selenium.webdriver.common.keys import Keys
 from unittest import skip
+from lists.forms import EMPTY_ITEM_ERROR, DUPLICATE_ITEM_ERROR
 
 
 class ItemValidationTest(FunctionalTest):
@@ -17,13 +18,13 @@ class ItemValidationTest(FunctionalTest):
 
         # The home page refreshes, and there is an error message saying that list items cannot be blank
         self.wait_for(
-            lambda: self.browser.find_element_by_css_selector('#id_text:invalid')
+            lambda: self.assertEqual(self.get_error_element().text, EMPTY_ITEM_ERROR)
         )
 
         # She starts typing some text for the new item and the error disappears
         self.get_item_input_box().send_keys('Buy milk')
         self.wait_for(
-            lambda: self.browser.find_element_by_css_selector('#id_text:valid'))
+            lambda: self.assertFalse(self.get_error_element().is_displayed()))
 
         # And she can submit it successfully
         self.get_item_input_box().send_keys(Keys.ENTER)
@@ -35,13 +36,13 @@ class ItemValidationTest(FunctionalTest):
         # Again, the browser will not comply
         self.wait_for_row_in_list_table('1: Buy milk')
         self.wait_for(
-            lambda: self.browser.find_element_by_css_selector('#id_text:invalid')
+            lambda: self.assertEqual(self.get_error_element().text, EMPTY_ITEM_ERROR)
         )
 
         # And she can correct it by filling some text in
         self.get_item_input_box().send_keys('Make tea')
         self.wait_for(
-            lambda: self.browser.find_element_by_css_selector('#id_text:valid'))
+            lambda: self.assertFalse(self.get_error_element().is_displayed()))
         self.get_item_input_box().send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: Buy milk')
         self.wait_for_row_in_list_table('2: Make tea')
@@ -59,7 +60,7 @@ class ItemValidationTest(FunctionalTest):
 
         # She sees a helpful error message
         self.wait_for(
-            lambda: self.assertEqual(self.get_error_element().text, "You've already got this in your list")
+            lambda: self.assertEqual(self.get_error_element().text, DUPLICATE_ITEM_ERROR)
         )
 
     def test_error_messages_are_cleared_on_input(self):
