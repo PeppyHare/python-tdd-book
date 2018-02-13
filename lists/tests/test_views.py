@@ -7,6 +7,7 @@ from lists.forms import ItemForm, ExistingListItemForm, EMPTY_ITEM_ERROR
 
 
 class HomePageTest(TestCase):
+
     def test_uses_home_template(self):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
@@ -21,6 +22,7 @@ class HomePageTest(TestCase):
 
 
 class ListViewTest(TestCase):
+
     def test_uses_list_template(self):
         list_ = List.objects.create()
         response = self.client.get(f'/lists/{list_.id}/')
@@ -109,6 +111,7 @@ class ListViewTest(TestCase):
 
 
 class NewListTest(TestCase):
+
     def test_can_save_a_POST_request(self):
         self.client.post('/lists/new', data={'text': 'A new list item'})
 

@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='item',
-            options={'ordering': ('id', )},
+            options={'ordering': ('id',)},
         ),
         migrations.AlterUniqueTogether(
             name='item',

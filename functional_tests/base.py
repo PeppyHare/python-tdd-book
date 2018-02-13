@@ -13,6 +13,7 @@ MAX_WAIT = 3
 
 
 class FunctionalTest(StaticLiveServerTestCase):
+
     def setUp(self):
         self.browser = self.get_webdriver()
         staging_server = os.environ.get('STAGING_SERVER')

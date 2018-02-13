@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 
 
 class NewVisitorTest(FunctionalTest):
+
     def test_can_start_a_list_for_one_user(self):
         # Edith has heard about a cool new online to-do app. She goes to check out its homepage
         self.browser.get(self.live_server_url)
@@ -34,8 +35,7 @@ class NewVisitorTest(FunctionalTest):
 
         # The page updates again, and now shows both items in her list
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
-        self.wait_for_row_in_list_table(
-            '2: Use peacock feathers to make a fly')
+        self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
 
         # Satisfied, she goes back to sleep
 
