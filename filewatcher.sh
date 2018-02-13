@@ -5,4 +5,4 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 GPG_TTY=$(tty)
 export GPG_TTY
-filewatcher '**/*.py **/*.sh **/*.html **/*.js' "bash $DIR/runtests.sh"
+filewatcher -s -I '**/*.py **/*.sh **/*.html **/*.js' "echo \"$FILENAME has changed\" && bash $DIR/runtests.sh"
