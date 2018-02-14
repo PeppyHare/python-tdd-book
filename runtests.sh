@@ -45,14 +45,12 @@ commitCode() {
 echo ""
 echo "$(date) :  Testing out new changes now :)"
 
-startPyVenv
 testSuperlists
-formatCode
 STATUS=$?
 sleep 1
 if [[ $STATUS == "0" ]]; then
-	printf "\033[32mPassing tests!\033[0m\n"
-	echo "I am in this directory: $(pwd)"
+    printf "\033[32mPassing tests!\033[0m\n"
+    formatCode
 	commitCode
 else
 	printf "\033[31mNot passing tests... :(\033[0m\n"
