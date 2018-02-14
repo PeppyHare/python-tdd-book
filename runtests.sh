@@ -13,12 +13,13 @@
 # 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-startPyVenv() {
-    source "$DIR/venv/bin/activate"
-}
+# startPyVenv() {
+#     source "$DIR/venv/bin/activate"
+# }
 
 testSuperlists() {
     python3.6 manage.py test lists \
+    && python3.6 manage.py test accounts \
     && phantomjs lists/static/tests/runner.js lists/static/tests/tests.html \
     && python3.6 manage.py test functional_tests
 }
@@ -45,8 +46,8 @@ echo ""
 echo "$(date) :  Testing out new changes now :)"
 
 startPyVenv
-formatCode
 testSuperlists
+formatCode
 STATUS=$?
 sleep 1
 if [[ $STATUS == "0" ]]; then

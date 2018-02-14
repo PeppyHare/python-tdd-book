@@ -10,7 +10,7 @@ import time
 import os
 import warnings
 
-MAX_WAIT = 3
+MAX_WAIT = 1
 
 
 class FunctionalTest(StaticLiveServerTestCase):
@@ -36,7 +36,7 @@ class FunctionalTest(StaticLiveServerTestCase):
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > MAX_WAIT:
                     raise e
-                time.sleep(0.5)
+                time.sleep(0.1)
 
     def wait_for(self, fn):
         start_time = time.time()
@@ -46,7 +46,7 @@ class FunctionalTest(StaticLiveServerTestCase):
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > MAX_WAIT:
                     raise e
-                time.sleep(0.5)
+                time.sleep(0.1)
 
     def get_webdriver(self):
         with warnings.catch_warnings():

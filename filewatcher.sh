@@ -1,8 +1,10 @@
 #!/bin/bash -x 
 # 
-# This is just a wrapper for the filewatcher gem
-#  (https://github.com/thomasfl/filewatcher)
+# This is just a wrapper for http://entrproject.org/
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 GPG_TTY=$(tty)
 export GPG_TTY
-filewatcher -s '**/*.py **/*.sh **/*.html **/*.js' 'echo "File: $FILENAME\nEvent: $EVENT\n" && bash '"$DIR"'/runtests.sh'
+
+# Can also use `find` here if silversurfer not installed
+ag -l | entr bash "$DIR/runtests.sh"
+
