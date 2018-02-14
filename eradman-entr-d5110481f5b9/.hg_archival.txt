@@ -1,4 +1,0 @@
-repo: 49108c05f40cf0f2abceacff753c2df1cd22e1ec
-node: d5110481f5b968402d94e0c00b0ab1fedc2ce9f0
-branch: default
-tag: entr-4.0
