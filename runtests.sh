@@ -12,6 +12,7 @@
 # This will watch for any file modifications in the project, and re-run the tests (and possibly commit the code) when they occur (wow such TDD)
 # 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_outside_in.html"
 
 # startPyVenv() {
 #     source "$DIR/venv/bin/activate"
@@ -37,7 +38,7 @@ commitCode() {
 	cd "$DIR" || exit
 	git add .
 	git status
-	git commit -m "Automated commit from passing tests. Now on https://www.obeythetestinggoat.com/book/chapter_fixtures_and_wait_decorator.html" && git push
+	git commit -m "Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK" && git push
 	printf "\033[32mEverything's looking good :)\033[0m\n\n"
 	return 0 # just in case nothing to commit
 }
