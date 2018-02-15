@@ -6,4 +6,4 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 # Can also use `find` here if silversurfer not installed
-ls -d * | entr -d bash "$DIR/runtests.sh"
+ag -l | entr -d bash "$DIR/runtests.sh"
