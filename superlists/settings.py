@@ -24,7 +24,9 @@ SECRET_KEY = 'ycn4#zrv5-y-d!hufcs9qr*zqqtfnq9&7nr^ahhy3*k78=-5j4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'superlists-staging.peppyhare.uk',
+]
 
 # Application definition
 
