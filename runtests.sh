@@ -12,7 +12,8 @@
 # This will watch for any file modifications in the project, and re-run the tests (and possibly commit the code) when they occur (wow such TDD)
 # 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_outside_in.html"
+CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_manual_deployment.html"
+# export STAGING_SERVER=superlists-staging.peppyhare.uk
 
 # startPyVenv() {
 #     source "$DIR/venv/bin/activate"
@@ -31,7 +32,6 @@ formatCode() {
     python3.6 -m yapf -i -r ./superlists
     python3.6 -m yapf -i -r ./lists
     python3.6 -m yapf -i -r ./functional_tests
-
 }
 
 commitCode() {
