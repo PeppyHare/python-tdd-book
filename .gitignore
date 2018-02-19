@@ -7,7 +7,5 @@ __pycache__
 *.sublime-workspace
 *.sublime-project
 ghostdriver.log
-bootstrap
-**/jquery-*
 **/qunit-*
 .env
