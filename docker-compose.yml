@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     networks:
       - superlists-net
+    volumes:
+      - django-static:/app/static
   nginx:
     build: ./nginx
     ports:
@@ -15,5 +17,9 @@ services:
     networks:
       - superlists-net
     restart: unless-stopped
+    volumes:
+      - django-static:/opt/app/static
 networks:
   superlists-net:
+volumes:
+  django-static:
