@@ -95,7 +95,7 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'consile': {
+        'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
         },
