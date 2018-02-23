@@ -1,0 +1,19 @@
+version: "3"
+services:
+  django:
+    build: ./django
+    # env_file: .env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    networks:
+      - superlists-net
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    networks:
+      - superlists-net
+    restart: unless-stopped
+networks:
+  superlists-net:
