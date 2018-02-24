@@ -12,9 +12,6 @@
     template:
       src: env-template.j2
       dest: /home/ubuntu/GitHub/python-tdd-book/.env
-  - name: debug print cur playbook_dir
-    debug:
-      var: playbook_dir
   - name: Build containers from source
     docker_service:
       build: yes
