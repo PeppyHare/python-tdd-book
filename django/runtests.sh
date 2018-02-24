@@ -70,12 +70,9 @@ success() {
 
 echo ""
 printf "\033[32m$(date) :  Testing out new changes now :)\033[0m\n"
-
 testSuperlists || fail
 formatCode
 branchOff || fail
 fullTest || fail
 commitCode
-else
-    printf "\033[31mNot passing tests... :(\033[0m\n"
-fi
+success
