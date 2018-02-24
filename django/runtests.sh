@@ -34,6 +34,11 @@ formatCode() {
     python -m yapf -i -r ./functional_tests
 }
 
+fullTest() {
+	echo "Always fail"
+	return 1
+}
+
 commitCode() {
 	cd "$DIR" || exit
 	git add .
@@ -47,8 +52,11 @@ echo ""
 echo "$(date) :  Testing out new changes now :)"
 
 testSuperlists
-STATUS=$?
-sleep 1
+STATUS1=$?
+fullTest
+STATUS2=$?
+STATUS=$(($STATUS1+$STATUS2))
+echo "Final status: $STATUS"
 if [[ $STATUS == "0" ]]; then
     printf "\033[32mPassing tests!\033[0m\n"
     formatCode

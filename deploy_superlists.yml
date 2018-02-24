@@ -1,0 +1,21 @@
+---
+- hosts: aws
+  tasks:
+  - name: Read secrets from ansible vault
+    include_vars: vault.yml
+  - name: Get source from github
+    git:
+      repo: 'https://github.com/PeppyHare/python-tdd-book.git'
+      dest: /home/ubuntu/GitHub/python-tdd-book
+  - name: Configure environment
+    template:
+      src: env-template.j2
+      dest: /home/ubuntu/GitHub/python-tdd-book/.env
+  - name: debug print cur playbook_dir
+    debug:
+      var: playbook_dir
+  - name: Build containers from source
+    docker_service:
+      build: yes
+      project_src: /home/ubuntu/GitHub/python-tdd-book
+      state: present

@@ -9,3 +9,4 @@ __pycache__
 ghostdriver.log
 **/qunit-*
 .env
+*.retry
