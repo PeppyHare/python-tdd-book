@@ -27,7 +27,7 @@ testSuperlists() {
 }
 
 formatCode() {
-    cd "$DIR" || exit
+    cd "$DIR" || exit 1
     printf "\033[32mApplying yapf...\033[0m\n"
     python -m yapf -i -r ./superlists
     python -m yapf -i -r ./lists
@@ -35,7 +35,7 @@ formatCode() {
 }
 
 branchOff() {
-    cd "$DIR" || exit
+    cd "$DIR" || exit 1
     git checkout dev
     git add .
     git status
@@ -43,9 +43,11 @@ branchOff() {
 }
 
 fullTest() {
-    echo "Always fail"
+    cd "$DIR/.." || exit 1
+    ansible-playbook -i ansible_inventory deploy_superlists.yml
+    cd "$DIR" || exit 1
     export STAGING_SERVER=superlists-staging.peppyhare.uk
-    return 1
+    python manage.py test functional_tests
 }
 
 commitCode() {
