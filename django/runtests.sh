@@ -12,7 +12,7 @@
 # This will watch for any file modifications in the project, and re-run the tests (and possibly commit the code) when they occur (wow such TDD)
 # 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_manual_deployment.html"
+CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_server_side_debugging.html"
 # export STAGING_SERVER=superlists-staging.peppyhare.uk
 
 # startPyVenv() {
