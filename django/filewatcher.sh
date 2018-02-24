@@ -8,4 +8,4 @@ cd "$DIR" || exit 1
 source ../venv/bin/activate
 
 # Can also use `find` here if silversurfer not installed
-ag -l | entr -d bash "$DIR/runtests.sh"
+/usr/bin/ag -l | /usr/local/bin/entr -d bash "$DIR/runtests.sh"
