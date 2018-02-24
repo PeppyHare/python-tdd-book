@@ -37,7 +37,7 @@ formatCode() {
 branchOff() {
     cd "$DIR" || exit 1
     git checkout dev
-    git add .
+    git add ..
     git status
     git commit -m "Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK" && git push origin dev
 }
