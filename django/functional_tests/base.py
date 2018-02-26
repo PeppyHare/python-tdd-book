@@ -16,10 +16,10 @@ MAX_WAIT = 1
 class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self):
-        self.browser = self.get_webdriver()
-        staging_server = os.environ.get('STAGING_SERVER')
-        if staging_server:
+        self.staging_server = os.environ.get('STAGING_SERVER')
+        if self.staging_server:
             self.live_server_url = 'http://' + staging_server
+        self.browser = self.get_webdriver()
 
     def tearDown(self):
         self.browser.refresh()
@@ -71,14 +71,17 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def get_webdriver(self):
         with warnings.catch_warnings():
+            # We use a more full-fledged webdriver in the real FT
             warnings.simplefilter("ignore")
-            # options = Options()
-            # options.add_argument("--headless")
             # browser = webdriver.PhantomJS()
-            # browser = webdriver.Firefox(firefox_options=options)
-            browser = webdriver.Remote(
-                command_executor="http://localhost:4444/wd/hub",
-                desired_capabilities=DesiredCapabilities.HTMLUNITWITHJS)
+            if self.staging_server:
+                options = Options()
+                options.add_argument("--headless")
+                browser = webdriver.Firefox(firefox_options=options)
+            else:
+                browser = webdriver.Remote(
+                    command_executor="http://localhost:4444/wd/hub",
+                    desired_capabilities=DesiredCapabilities.HTMLUNITWITHJS)
             return browser
 
     def get_item_input_box(self):

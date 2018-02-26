@@ -20,14 +20,16 @@ CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_server_sid
 # }
 
 testSuperlists() {
+	source "$DIR"/.env
+	cd "$DIR/django" || exit 1
     python manage.py test lists \
     && python manage.py test accounts \
     && phantomjs lists/static/tests/runner.js lists/static/tests/tests.html \
-    && python manage.py test functional_tests
+    && python manage.py test --failfast functional_tests
 }
 
 formatCode() {
-    cd "$DIR" || exit 1
+    cd "$DIR/django" || exit 1
     printf "\033[32mApplying yapf...\033[0m\n"
     python -m yapf -i -r ./superlists
     python -m yapf -i -r ./lists
@@ -37,17 +39,17 @@ formatCode() {
 branchOff() {
     cd "$DIR" || exit 1
     git checkout dev
-    git add ..
+    git add .
     git status
     git commit -m "Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK" && git push origin dev
 }
 
 fullTest() {
-    cd "$DIR/.." || exit 1
-    ansible-playbook -i ansible_inventory deploy_superlists.yml
     cd "$DIR" || exit 1
+    ansible-playbook -i ansible_inventory deploy_superlists.yml
     export STAGING_SERVER=superlists-staging.peppyhare.uk
-    python manage.py test functional_tests
+    cd "$DIR/django" || exit 1
+    python manage.py test --failfast functional_tests
 }
 
 commitCode() {

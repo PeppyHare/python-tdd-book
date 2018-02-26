@@ -13,7 +13,7 @@ SUBJECT = 'Your login link for Superlists'
 class LoginTest(FunctionalTest):
 
     def wait_for_email(self, test_email, subject):
-        if not hasattr(self, 'staging_server'):
+        if not self.staging_server:
             email = mail.outbox[0]
             self.assertIn(test_email, email.to)
             self.assertEqual(email.subject, subject)
@@ -21,9 +21,12 @@ class LoginTest(FunctionalTest):
 
         email_id = None
         start = time.time()
-        inbox = poplib.POP3_SSL('pop.gmail.com')
+        inbox = poplib.POP3_SSL('pop.googlemail.com', '995')
         try:
+            print("Logging in to POP with test_email: %s" % test_email)
             inbox.user(test_email)
+            print("Using password %s for test_email: %s" %
+                  (os.environ['GMAIL_PASSWORD'], test_email))
             inbox.pass_(os.environ['GMAIL_PASSWORD'])
             while time.time() - start < 60:
                 # Get 10 newest messages
@@ -45,7 +48,7 @@ class LoginTest(FunctionalTest):
     def test_can_get_email_link_to_log_in(self):
         # Edith goes to the awesome superlists site and notices a "log in" section in the navbar for the first time.
         # It's telling her to enter her email address, so she does
-        if hasattr(self, 'staging_server'):
+        if self.staging_server:
             test_email = 'emb.superlists.testmail@gmail.com'
         else:
             test_email = 'edith@example.com'
