@@ -23,6 +23,9 @@ class ItemValidationTest(FunctionalTest):
 
         # She starts typing some text for the new item and the error disappears
         self.get_item_input_box().send_keys('Buy milk')
+        if self.staging_server:
+            import pdb
+            pdb.set_trace()
         self.wait_for(
             lambda: self.assertFalse(self.get_error_element().is_displayed()))
 
