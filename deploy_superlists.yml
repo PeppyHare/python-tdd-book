@@ -1,5 +1,6 @@
 ---
 - hosts: aws
+  gather_facts: no
   tasks:
   - name: Read secrets from ansible vault
     include_vars: vault.yml
