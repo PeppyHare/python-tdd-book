@@ -9,25 +9,24 @@ from lists.forms import EMPTY_ITEM_ERROR, DUPLICATE_ITEM_ERROR
 class ItemValidationTest(FunctionalTest):
 
     def get_error_element(self):
-        return self.browser.find_element_by_css_selector('.help-block')
+        return self.browser.find_element_by_css_selector('.has-error')
 
     def test_cannot_add_empty_list_items(self):
         # Edith goes to the home page and accidentally tries to submit an empty list item. She hits enter in the the input box
         self.browser.get(self.live_server_url)
+        self.browser.maximize_window()
         self.get_item_input_box().send_keys(Keys.ENTER)
 
         # The home page refreshes, and there is an error message saying that list items cannot be blank
         self.wait_for(
-            lambda: self.assertEqual(self.get_error_element().text, EMPTY_ITEM_ERROR)
+            lambda: self.browser.find_elements_by_css_selector('#id_text:invalid')
         )
 
         # She starts typing some text for the new item and the error disappears
         self.get_item_input_box().send_keys('Buy milk')
-        if self.staging_server:
-            import pdb
-            pdb.set_trace()
         self.wait_for(
-            lambda: self.assertFalse(self.get_error_element().is_displayed()))
+            lambda: self.browser.find_elements_by_css_selector('#id_text:valid')
+        )
 
         # And she can submit it successfully
         self.get_item_input_box().send_keys(Keys.ENTER)
@@ -39,13 +38,14 @@ class ItemValidationTest(FunctionalTest):
         # Again, the browser will not comply
         self.wait_for_row_in_list_table('1: Buy milk')
         self.wait_for(
-            lambda: self.assertIn(self.get_error_element().text, EMPTY_ITEM_ERROR)
+            lambda: self.browser.find_elements_by_css_selector('#id_text:invalid')
         )
 
         # And she can correct it by filling some text in
         self.get_item_input_box().send_keys('Make tea')
         self.wait_for(
-            lambda: self.assertFalse(self.get_error_element().is_displayed()))
+            lambda: self.browser.find_elements_by_css_selector('#id_text:valid')
+        )
         self.get_item_input_box().send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: Buy milk')
         self.wait_for_row_in_list_table('2: Make tea')
