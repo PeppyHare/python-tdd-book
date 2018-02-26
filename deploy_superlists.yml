@@ -20,8 +20,8 @@
   - name: Collect static files into docker volume
     docker_container:
       image: pythontddbook_django
+      name: pythontddbook_collectstatic
       auto_remove: yes
       volumes:
-        pythontddbook_django-static
+        pythontddbook_django-static:/app/static
       command: /venv/bin/python /app/manage.py collectstatic --noinput
-    # command: docker-compose -f /home/ubuntu/GitHub/python-tdd-book/docker-compose.yml exec -t django /venv/bin/python /app/manage.py collectstatic --noinput
