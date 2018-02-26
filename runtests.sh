@@ -74,7 +74,7 @@ echo ""
 printf "\033[32m$(date) :  Testing out new changes now :)\033[0m\n"
 testSuperlists || fail
 formatCode
-branchOff || fail
+branchOff
 fullTest || fail
 commitCode
 success
