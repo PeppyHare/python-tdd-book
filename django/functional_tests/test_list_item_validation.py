@@ -23,6 +23,8 @@ class ItemValidationTest(FunctionalTest):
 
         # She starts typing some text for the new item and the error disappears
         self.get_item_input_box().send_keys('Buy milk')
+        import pdb
+        pdb.set_trace()
         self.wait_for(
             lambda: self.assertFalse(self.get_error_element().is_displayed()))
 
@@ -36,7 +38,7 @@ class ItemValidationTest(FunctionalTest):
         # Again, the browser will not comply
         self.wait_for_row_in_list_table('1: Buy milk')
         self.wait_for(
-            lambda: self.assertEqual(self.get_error_element().text, EMPTY_ITEM_ERROR)
+            lambda: self.assertIn(self.get_error_element().text, EMPTY_ITEM_ERROR)
         )
 
         # And she can correct it by filling some text in
