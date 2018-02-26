@@ -12,7 +12,7 @@
     template:
       src: env-template.j2
       dest: /home/ubuntu/GitHub/python-tdd-book/.env
-  - name: Build containers from source
+  - name: Build and deploy containers from source
     docker_service:
       build: yes
       project_src: /home/ubuntu/GitHub/python-tdd-book
