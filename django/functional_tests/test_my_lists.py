@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth import BACKEND_SESSION_KEY, SESSION_KEY, get_user_model
 from django.contrib.sessions.backends.db import SessionStore
 from .base import FunctionalTest
+from urllib.parse import urlparse
 User = get_user_model()
 
 
@@ -15,12 +16,18 @@ class MyListsTest(FunctionalTest):
         session.save()
         # to set a cookie we need to first visit the domain
         # 404 pages load the quickest!
-        self.browser.get(self.live_server_url + '/404_no_such_url/')
+        self.browser.get(self.live_server_url)
+        # Because of phantomjs restrictions, need to set domain along with cookie
+        if self.staging_server:
+            domain = urlparse(self.live_server_url).netloc.split(':')[0]
+        else:
+            domain = '.localhost'
         self.browser.add_cookie(
             dict(
                 name=settings.SESSION_COOKIE_NAME,
                 value=session.session_key,
-                path='/'))
+                path='/',
+                domain=domain))
 
     def test_logged_in_users_lists_are_saved_as_my_lists(self):
         email = 'edith@example.com'

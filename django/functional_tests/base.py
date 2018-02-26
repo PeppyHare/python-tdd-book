@@ -70,17 +70,17 @@ class FunctionalTest(StaticLiveServerTestCase):
         self.assertNotIn(email, navbar.text)
 
     def get_webdriver(self):
-        # with warnings.catch_warnings():
-        # warnings.simplefilter("ignore")
-        if self.staging_server:
-            # browser = webdriver.PhantomJS()
-            options = Options()
-            options.add_argument("--headless")
-            browser = webdriver.Firefox(firefox_options=options)
-        else:
-            browser = webdriver.Remote(
-                command_executor="http://localhost:4444/wd/hub",
-                desired_capabilities=DesiredCapabilities.HTMLUNITWITHJS)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            # if self.staging_server:
+            # options = Options()
+            # options.add_argument("--headless")
+            # browser = webdriver.Firefox(firefox_options=options)
+            browser = webdriver.PhantomJS()
+            # else:
+            # browser = webdriver.Remote(
+            #     command_executor="http://localhost:4444/wd/hub",
+            #     desired_capabilities=DesiredCapabilities.PHANTOMJS)
         return browser
 
     def get_item_input_box(self):
