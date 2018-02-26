@@ -79,10 +79,6 @@ class LoginTest(FunctionalTest):
         # she is logged in
         self.wait_to_be_logged_in(email=test_email)
 
-        if self.staging_server:
-            import pdb
-            pdb.set_trace()
-
         # Now she logs out
         self.browser.find_element_by_link_text('Log out').click()
 
