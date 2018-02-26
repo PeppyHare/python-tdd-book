@@ -20,9 +20,19 @@ COMMIT_MSG="Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK"
 #     source "$DIR/venv/bin/activate"
 # }
 
+fail() {
+    printf "\033[31mNot passing tests... :(\033[0m\n"
+    exit 1
+}
+
+success() {
+    printf "\033[32mEverything's looking good :)\033[0m\n\n"
+    return 0
+}
+
 testSuperlists() {
 	source "$DIR"/.env
-	cd "$DIR/django" || exit 1
+	cd "$DIR/django" || fail
     python manage.py test lists \
     && python manage.py test accounts \
     && phantomjs lists/static/tests/runner.js lists/static/tests/tests.html \
@@ -30,7 +40,7 @@ testSuperlists() {
 }
 
 formatCode() {
-    cd "$DIR/django" || exit 1
+    cd "$DIR/django" || fail
     printf "\033[32mApplying yapf...\033[0m\n"
     python -m yapf -i -r ./superlists
     python -m yapf -i -r ./lists
@@ -38,7 +48,7 @@ formatCode() {
 }
 
 branchOff() {
-    cd "$DIR" || exit 1
+    cd "$DIR" || fail
     git checkout dev
     git add .
     git status
@@ -46,10 +56,10 @@ branchOff() {
 }
 
 fullTest() {
-    cd "$DIR" || exit 1
-    ansible-playbook -i ansible_inventory deploy_superlists.yml
+    cd "$DIR" || fail
+    ansible-playbook -i ansible_inventory deploy_superlists.yml || fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
-    cd "$DIR/django" || exit 1
+    cd "$DIR/django" || fail
     python manage.py test --failfast functional_tests
 }
 
@@ -61,15 +71,7 @@ commitCode() {
     git checkout dev
 }
 
-fail() {
-    printf "\033[31mNot passing tests... :(\033[0m\n"
-    exit 1
-}
 
-success() {
-    printf "\033[32mEverything's looking good :)\033[0m\n\n"
-    return 0
-}
 
 echo ""
 printf "\033[32m$(date) :  Testing out new changes now :)\033[0m\n"
