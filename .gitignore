@@ -10,3 +10,4 @@ ghostdriver.log
 **/qunit-*
 .env
 *.retry
+*.png
