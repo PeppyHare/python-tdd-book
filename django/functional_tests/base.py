@@ -73,8 +73,8 @@ class FunctionalTest(StaticLiveServerTestCase):
         with warnings.catch_warnings():
             # We use a more full-fledged webdriver in the real FT
             warnings.simplefilter("ignore")
-            # browser = webdriver.PhantomJS()
             if self.staging_server:
+                # browser = webdriver.PhantomJS()
                 options = Options()
                 options.add_argument("--headless")
                 browser = webdriver.Firefox(firefox_options=options)
