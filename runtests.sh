@@ -14,8 +14,7 @@
 # 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_server_side_debugging.html"
-# COMMIT_MSG="Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK"
-COMMIT_MSG="Testing switching to splinter from selenium for browser tests"
+COMMIT_MSG="Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK"
 
 # startPyVenv() {
 #     source "$DIR/venv/bin/activate"
