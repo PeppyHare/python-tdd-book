@@ -18,4 +18,4 @@
       project_src: /home/ubuntu/GitHub/python-tdd-book
       state: present
   - name: Collect static files into docker volume
-    command: docker-compose -f /home/ubuntu/GitHub/python-tdd-book/docker-compose.yml exec django /venv/bin/python /app/manage.py collectstatic --noinput
+    command: docker-compose -f /home/ubuntu/GitHub/python-tdd-book/docker-compose.yml exec -t django /venv/bin/python /app/manage.py collectstatic --noinput
