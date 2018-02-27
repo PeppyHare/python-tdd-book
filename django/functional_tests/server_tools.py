@@ -23,10 +23,10 @@ def reset_database(host):
 
 def create_session_on_server(host, email):
     with settings(host_string=f'{FABRIC_SSH_USER}@{host}'):
+        import pdb
+        pdb.set_trace()
         env_vars = _get_server_env_vars()
         with shell_env(**env_vars):
-            import pdb
-            pdb.set_trace()
             session_key = run(
                 f'docker-compose -f /home/ubuntu/GitHub/python-tdd-book/docker-compose.yml exec django /venv/bin/python /app/manage.py create_session {email}'
             )
