@@ -4,6 +4,7 @@ from django.contrib.sessions.backends.db import SessionStore
 from .base import FunctionalTest
 from urllib.parse import urlparse
 from selenium.common.exceptions import WebDriverException
+
 User = get_user_model()
 
 
@@ -32,8 +33,7 @@ class MyListsTest(FunctionalTest):
                     domain=domain,
                 ))
         except (WebDriverException) as e:
-            import pdb
-            pdb.set_trace()
+            logger.error(e.message)
 
     def test_logged_in_users_lists_are_saved_as_my_lists(self):
         email = 'edith@example.com'
