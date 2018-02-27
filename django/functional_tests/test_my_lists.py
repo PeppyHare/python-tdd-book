@@ -22,6 +22,9 @@ class MyListsTest(FunctionalTest):
             domain = urlparse(self.live_server_url).netloc.split(':')[0]
         else:
             domain = '.localhost'
+        if self.staging_server:
+            import pdb
+            pdb.set_trace()
         self.browser.add_cookie(
             dict(
                 name=settings.SESSION_COOKIE_NAME,
