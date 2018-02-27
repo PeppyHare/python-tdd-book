@@ -48,8 +48,6 @@ def execute_ansible_play(play_source):
 
     play = Play().load(
         play_source, variable_manager=variable_manager, loader=loader)
-    import pdb
-    pdb.set_trace()
     # actually run it
     tqm = None
     try:
