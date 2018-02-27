@@ -21,6 +21,9 @@ class LoginTest(FunctionalTest):
 
         email_id = None
         start = time.time()
+        if self.staging_server:
+            import pdb
+            pdb.set_trace
         try:
             while time.time() - start < 60:
                 inbox = poplib.POP3_SSL('pop.googlemail.com', '995')
@@ -70,9 +73,6 @@ class LoginTest(FunctionalTest):
         url = url_search.group(0)
         self.assertIn(self.live_server_url, url)
 
-        if self.staging_server:
-            import pdb
-            pdb.set_trace()
         # she clicks it
         self.browser.get(url)
 
