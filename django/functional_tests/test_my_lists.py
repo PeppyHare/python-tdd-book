@@ -4,8 +4,10 @@ from django.contrib.sessions.backends.db import SessionStore
 from .base import FunctionalTest
 from urllib.parse import urlparse
 from selenium.common.exceptions import WebDriverException
+import logging
 
 User = get_user_model()
+logger = logging.getLogger(__name__)
 
 
 class MyListsTest(FunctionalTest):
