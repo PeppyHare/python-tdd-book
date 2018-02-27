@@ -36,7 +36,7 @@ testSuperlists() {
     python manage.py test lists \
     && python manage.py test accounts \
     && phantomjs lists/static/tests/runner.js lists/static/tests/tests.html \
-    && python manage.py test --failfast functional_tests
+    && python manage.py test --failfast --parallel=5 functional_tests
 }
 
 formatCode() {
@@ -60,7 +60,7 @@ fullTest() {
     ansible-playbook -i ansible_inventory deploy_superlists.yml || fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
     cd "$DIR/django" || fail
-    python manage.py test --failfast functional_tests
+    python manage.py test --failfast --parallel=5 functional_tests
 }
 
 commitCode() {
