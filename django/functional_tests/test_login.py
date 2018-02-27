@@ -2,7 +2,7 @@ from django.core import mail
 from selenium.webdriver.common.keys import Keys
 import re
 import os
-import imaplib
+import poplib
 import time
 
 from .base import FunctionalTest
@@ -21,15 +21,13 @@ class LoginTest(FunctionalTest):
 
         email_id = None
         start = time.time()
-        inbox = imaplib.IMAP4_SSL('imap.gmail.com')
-        inbox.login(test_email, os.environ['GMAIL_PASSWORD'])
-        inbox.select("inbox")
-        import pdb
-        pdb.set_trace()
         try:
             while time.time() - start < 60:
+                inbox = poplib.POP3_SSL('pop.googlemail.com', '995')
                 # Get 10 newest messages
-                result, data = inbox.search(None, "ALL")
+                inbox.user(test_email)
+                inbox.pass_(os.environ['GMAIL_PASSWORD'])
+                count, _ = inbox.stat()
                 for i in reversed(range(max(1, count - 10), count + 1)):
                     print('getting msg', i)
                     _, lines, __ = inbox.retr(i)
@@ -72,6 +70,9 @@ class LoginTest(FunctionalTest):
         url = url_search.group(0)
         self.assertIn(self.live_server_url, url)
 
+        if self.staging_server:
+            import pdb
+            pdb.set_trace()
         # she clicks it
         self.browser.get(url)
 
