@@ -9,6 +9,7 @@
       repo: 'https://github.com/PeppyHare/python-tdd-book.git'
       dest: /home/ubuntu/GitHub/python-tdd-book
       version: dev
+      depth: 1
   - name: Configure environment
     template:
       src: env-template.j2
