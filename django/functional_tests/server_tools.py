@@ -16,10 +16,9 @@ def reset_database(host):
             '--rm', '--name pythontddbook_resetdb',
             '-v pythontddbook_django-db:/app/db.sqlite3'
         ]
-        docker_image = 'pythontddbook_django'
+        docker_image = 'pythontddbook_django_1'
         docker_cmd = '/venv/bin/python /app/manage.py flush --noinput'
-        run(f'docker exec {" ".join(docker_run_opts)} {docker_image} {docker_cmd}'
-           )
+        run(f'docker exec {docker_container} {docker_cmd}')
 
 
 def create_session_on_server(host, email):
