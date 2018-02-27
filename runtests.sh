@@ -65,10 +65,15 @@ fullTest() {
 
 commitCode() {
     printf "\033[32mCommitting changes to the master branch\033[0m\n\n"
+    git stash | grep -q "No local changes"
+    no_stash=$?
     git checkout master
     git pull origin dev
     git push origin master
     git checkout dev
+    if [ $no_stash -gt 0 ]; then
+        git stash pop
+    fi
 }
 
 
