@@ -25,11 +25,6 @@ fail() {
     exit 1
 }
 
-success() {
-    printf "\033[32mEverything's looking good :)\033[0m\n\n"
-    return 0
-}
-
 testSuperlists() {
 	source "$DIR"/.env
 	cd "$DIR/django" || fail
@@ -77,13 +72,10 @@ commitCode() {
     fi
 }
 
-
-
-echo ""
-printf "\033[32m$(date) :  Testing out new changes now :)\033[0m\n"
+printf "\n\033[32m$(date) :  Testing out new changes now :)\033[0m\n"
 testSuperlists || fail
 formatCode
 branchOff
 fullTest || fail
 commitCode
-success
+printf "\033[32mEverything's looking good :)\033[0m\n\n"
