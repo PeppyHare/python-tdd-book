@@ -1,36 +1,31 @@
 from django.conf import settings
-from django.contrib.auth import BACKEND_SESSION_KEY, SESSION_KEY, get_user_model
-from django.contrib.sessions.backends.db import SessionStore
 from .base import FunctionalTest
 from urllib.parse import urlparse
 from selenium.common.exceptions import WebDriverException
+from .server_tools import create_session_on_server
+from .management.commands.create_session import create_pre_authenticated_session
 import logging
 
-User = get_user_model()
 logger = logging.getLogger(__name__)
 
 
 class MyListsTest(FunctionalTest):
 
     def create_pre_authenticated_session(self, email):
-        user = User.objects.create(email=email)
-        session = SessionStore()
-        session[SESSION_KEY] = user.pk
-        session[BACKEND_SESSION_KEY] = settings.AUTHENTICATION_BACKENDS[0]
-        session.save()
-        # to set a cookie we need to first visit the domain
-        # 404 pages load the quickest!
-        self.browser.get(self.live_server_url)
-        # Because of phantomjs restrictions, need to set domain along with cookie
         if self.staging_server:
+            session_key = create_session_on_server(self.staging_server, email)
             domain = urlparse(self.live_server_url).netloc.split(':')[0]
         else:
+            session_key = create_pre_authenticated_session(email)
             domain = '.localhost'
+        # to set a cookie we need to first visit the domain
+        self.browser.get(self.live_server_url)
+        # Because of phantomjs restrictions, need to set domain along with cookie
         try:
             self.browser.add_cookie(
                 dict(
                     name=settings.SESSION_COOKIE_NAME,
-                    value=session.session_key,
+                    value=session_key,
                     path='/',
                     domain=domain,
                 ))

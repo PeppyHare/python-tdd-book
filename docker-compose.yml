@@ -10,6 +10,7 @@ services:
       - superlists-net
     volumes:
       - django-static:/app/static
+      - django-db:/app/db.sqlite3
   nginx:
     build: ./nginx
     ports:
@@ -23,3 +24,4 @@ networks:
   superlists-net:
 volumes:
   django-static:
+  django-db:
