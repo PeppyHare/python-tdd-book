@@ -28,6 +28,9 @@ class LoginTest(FunctionalTest):
             print("Using password %s for test_email: %s" %
                   (os.environ['GMAIL_PASSWORD'], test_email))
             inbox.pass_(os.environ['GMAIL_PASSWORD'])
+            if staging_server:
+                import pdb
+                pdb.set_trace()
             while time.time() - start < 60:
                 # Get 10 newest messages
                 count, _ = inbox.stat()
@@ -73,9 +76,6 @@ class LoginTest(FunctionalTest):
         url = url_search.group(0)
         self.assertIn(self.live_server_url, url)
 
-        if self.staging_server:
-            import pdb
-            pdb.set_trace()
         # she clicks it
         self.browser.get(url)
 
