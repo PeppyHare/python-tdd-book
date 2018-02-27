@@ -1,5 +1,5 @@
 from fabric.api import run
-from fabric.context_managers import settings, shell_env
+from fabric.context_managers import settings, shell_env, hide
 from fabric.state import output
 
 FABRIC_SSH_USER = 'ubuntu'
@@ -12,7 +12,9 @@ def _get_server_env_vars():
 
 
 def reset_database(host):
-    with settings(host_string=f'{FABRIC_SSH_USER}@{host}'):
+    with settings(
+            hide('warnings', 'running', 'stdout', 'stderr'),
+            host_string=f'{FABRIC_SSH_USER}@{host}'):
         docker_run_opts = [
             '--rm', '--name pythontddbook_resetdb',
             '-v pythontddbook_django-db:/app/db.sqlite3'
