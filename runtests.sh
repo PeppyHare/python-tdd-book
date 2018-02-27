@@ -60,8 +60,7 @@ fullTest() {
     ansible-playbook -i ansible_inventory deploy_superlists.yml || fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
     cd "$DIR/django" || fail
-    python manage.py test --failfast functional_tests
-    # python manage.py test --failfast --parallel=5 functional_tests
+    python manage.py test --failfast --parallel=8 functional_tests
 }
 
 commitCode() {
