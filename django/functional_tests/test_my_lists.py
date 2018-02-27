@@ -3,6 +3,7 @@ from django.contrib.auth import BACKEND_SESSION_KEY, SESSION_KEY, get_user_model
 from django.contrib.sessions.backends.db import SessionStore
 from .base import FunctionalTest
 from urllib.parse import urlparse
+from selenium.common.exceptions import WebDriverException
 User = get_user_model()
 
 
@@ -22,16 +23,17 @@ class MyListsTest(FunctionalTest):
             domain = urlparse(self.live_server_url).netloc.split(':')[0]
         else:
             domain = '.localhost'
-        if self.staging_server:
+        try:
+            self.browser.add_cookie(
+                dict(
+                    name=settings.SESSION_COOKIE_NAME,
+                    value=session.session_key,
+                    path='/',
+                    domain=domain,
+                ))
+        except (WebDriverException) as e:
             import pdb
             pdb.set_trace()
-        self.browser.add_cookie(
-            dict(
-                name=settings.SESSION_COOKIE_NAME,
-                value=session.session_key,
-                path='/',
-                domain=domain,
-            ))
 
     def test_logged_in_users_lists_are_saved_as_my_lists(self):
         email = 'edith@example.com'

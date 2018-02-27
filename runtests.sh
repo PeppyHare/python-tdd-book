@@ -36,7 +36,7 @@ testSuperlists() {
     python manage.py test lists \
     && python manage.py test accounts \
     && phantomjs lists/static/tests/runner.js lists/static/tests/tests.html \
-    && python manage.py test --failfast --parallel=5 functional_tests
+    && python manage.py test --failfast --parallel=8 functional_tests
 }
 
 formatCode() {
