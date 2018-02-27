@@ -35,7 +35,7 @@ class MyListsTest(FunctionalTest):
                     domain=domain,
                 ))
         except (WebDriverException) as e:
-            logger.exception("message")
+            logger.exception("Failure to add session id cookie.")
 
     def test_logged_in_users_lists_are_saved_as_my_lists(self):
         email = 'edith@example.com'
