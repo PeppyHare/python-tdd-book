@@ -16,7 +16,7 @@ def reset_database(host):
             '--rm', '--name pythontddbook_resetdb',
             '-v pythontddbook_django-db:/app/db.sqlite3'
         ]
-        docker_image = 'pythontddbook_django_1'
+        docker_container = 'pythontddbook_django_1'
         docker_cmd = '/venv/bin/python /app/manage.py flush --noinput'
         run(f'docker exec {docker_container} {docker_cmd}')
 
