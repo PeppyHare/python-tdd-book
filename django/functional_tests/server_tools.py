@@ -18,7 +18,7 @@ def reset_database(host):
         ]
         docker_image = 'pythontddbook_django'
         docker_cmd = '/venv/bin/python /app/manage.py flush --noinput'
-        run(f'docker run {docker_image} {" ".join(docker_run_opts)} {docker_cmd}'
+        run(f'docker run {" ".join(docker_run_opts)} {docker_image} {docker_cmd}'
            )
 
 
