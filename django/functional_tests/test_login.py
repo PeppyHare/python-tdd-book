@@ -73,6 +73,9 @@ class LoginTest(FunctionalTest):
         url = url_search.group(0)
         self.assertIn(self.live_server_url, url)
 
+        if self.staging_server:
+            import pdb
+            pdb.set_trace()
         # she clicks it
         self.browser.get(url)
 
