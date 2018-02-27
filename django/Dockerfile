@@ -25,9 +25,10 @@ RUN set -ex \
   	# && apk del .build-deps
   	&& echo "install done"
 
-RUN mkdir /app/
+RUN mkdir -p /app/db
 WORKDIR /app/
 ADD . /app/
+VOLUME /app/db
 
 # Set up Django stuff
 RUN /venv/bin/python /app/manage.py migrate --noinput
