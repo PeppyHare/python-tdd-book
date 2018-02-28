@@ -61,13 +61,6 @@ branchOff() {
 fullTest() {
     cd "$DIR" || fail
     time ssh ubuntu@superlists.peppyhare.uk "/bin/bash -l /home/ubuntu/GitHub/python-tdd-book/runtests.remote.sh"
-    # time ssh_ec2_cmd "$REMOTE_ANSIBLE -i 'localhost,' -c local $PLAYBOOK_LOC"
-    # time ansible-playbook -vvvvv -i ansible_inventory deploy_superlists.yml || fail
-    fail
-    export STAGING_SERVER=superlists-staging.peppyhare.uk
-    cd "$DIR/django" || fail
-    printf "\033[32mRunning full FTs against live server...\033[0m\n"
-    time python manage.py test --keepdb --failfast --parallel=8 functional_tests
 }
 
 commitCode() {
