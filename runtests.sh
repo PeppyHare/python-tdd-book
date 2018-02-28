@@ -34,9 +34,9 @@ testSuperlists() {
 	source "$DIR"/.env
 	cd "$DIR/django" || fail
     printf "\033[32mRunning unit tests...\033[0m\n"
-    time python manage.py test lists accounts || fail
+    python manage.py test lists accounts || fail
     printf "\033[32mRunning QUnit javascript tests...\033[0m\n"
-    time phantomjs lists/static/tests/runner.js lists/static/tests/tests.html || fail
+    phantomjs lists/static/tests/runner.js lists/static/tests/tests.html || fail
 }
 
 formatCode() {
@@ -54,9 +54,9 @@ branchOff() {
 
 fullTest() {
     cd "$DIR" || fail
-    time ssh ubuntu@superlists.peppyhare.uk "/bin/bash -l /home/ubuntu/GitHub/python-tdd-book/runtests.remote.sh" || fail
+    ssh ubuntu@superlists.peppyhare.uk "/bin/bash -l /home/ubuntu/GitHub/python-tdd-book/runtests.remote.sh" || fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
-    time python "$DIR/django/manage.py" test --keepdb --failfast --parallel=8 functional_tests || fail
+    python "$DIR/django/manage.py" test --keepdb --failfast --parallel=8 functional_tests || fail
 }
 
 commitCode() {
@@ -73,9 +73,10 @@ commitCode() {
 }
 
 printf "\n\033[32m$(date) :  Testing out new changes now :)\033[0m\n"
-testSuperlists || fail
+time testSuperlists || fail
 time formatCode
 time branchOff
-fullTest || fail
-commitCode
+time fullTest || fail
+time commitCode
 printf "\033[32mEverything's looking good :)\033[0m\n\n"
+sleep 1
