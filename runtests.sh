@@ -52,11 +52,11 @@ branchOff() {
 
 fullTest() {
     cd "$DIR" || fail
-    ansible-playbook -i ansible_inventory -vvvv deploy_superlists.yml || fail
+    ansible-playbook -i ansible_inventory deploy_superlists.yml || fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
     cd "$DIR/django" || fail
     printf "\033[32mRunning full FTs against live server...\033[0m\n"
-    python manage.py test --failfast --parallel=8 functional_tests
+    python manage.py test --keepdb --failfast --parallel=8 functional_tests
 }
 
 commitCode() {
