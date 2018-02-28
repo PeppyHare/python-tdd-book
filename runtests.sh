@@ -28,8 +28,7 @@ fail() {
 testSuperlists() {
 	source "$DIR"/.env
 	cd "$DIR/django" || fail
-    python manage.py test lists \
-    && python manage.py test accounts \
+    python manage.py test lists accounts \
     && phantomjs lists/static/tests/runner.js lists/static/tests/tests.html \
     && python manage.py test --failfast --parallel=8 functional_tests
 }
