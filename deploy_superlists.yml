@@ -20,24 +20,19 @@
       project_src: /home/ubuntu/GitHub/python-tdd-book
       state: present
       services: django
-  # Use nasty command modules here for a bit more speed compared to docker_container
   - name: Collect static files into docker volume
-    command: docker run --rm -v pythontddbook_django-static:/app/static --name pythontddbook_collectstatic pythontddbook_django /venv/bin/python /app/manage.py collectstatic --noinput
+    docker_container:
+      image: pythontddbook_django
+      name: pythontddbook_collectstatic
+      auto_remove: yes
+      volumes:
+        pythontddbook_django-static:/app/static
+      command: /venv/bin/python /app/manage.py collectstatic --noinput
   - name: Reset the database
-    command: docker run --rm -v pythontddbook_django-db:/app/db --name pythontddbook_resetdb pythontddbook_django /venv/bin/python /app/manage.py flush --noinput
-
-  #   docker_container:
-  #     image: pythontddbook_django
-  #     name: pythontddbook_collectstatic
-  #     auto_remove: yes
-  #     volumes:
-  #       pythontddbook_django-static:/app/static
-  #     command: /venv/bin/python /app/manage.py collectstatic --noinput
-  # - name: Reset the database
-  #   docker_container:
-  #     image: pythontddbook_django
-  #     name: pythontddbook_resetdb
-  #     auto_remove: yes
-  #     volumes:
-  #       pythontddbook_django-db:/app/db
-  #     command: /venv/bin/python /app/manage.py flush --noinput
+    docker_container:
+      image: pythontddbook_django
+      name: pythontddbook_resetdb
+      auto_remove: yes
+      volumes:
+        pythontddbook_django-db:/app/db
+      command: /venv/bin/python /app/manage.py flush --noinput
