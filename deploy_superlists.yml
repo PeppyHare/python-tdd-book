@@ -27,3 +27,11 @@
       volumes:
         pythontddbook_django-static:/app/static
       command: /venv/bin/python /app/manage.py collectstatic --noinput
+  - name: Reset the database
+    docker_container:
+      image: pythontddbook_django
+      name: pythontddbook_resetdb
+      auto_remove: yes
+      volumes:
+        pythontddbook_django-db:/app/db
+      command: /venv/bin/python /app/manage.py flush --noinput
