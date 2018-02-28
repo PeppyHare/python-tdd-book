@@ -18,7 +18,7 @@ COMMIT_MSG="Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK"
 EC2_VENV="/home/ubuntu/GitHub/python-tdd-book/venv"
 
 ssh_ec2_cmd() {
-    ssh ubuntu@superlists.peppyhare.uk /bin/bash source "$EC2_VENV/bin/activate" && "$1"
+    ssh ubuntu@superlists.peppyhare.uk
 }
 
 # startPyVenv() {
@@ -60,9 +60,7 @@ branchOff() {
 
 fullTest() {
     cd "$DIR" || fail
-    REMOTE_ANSIBLE="/home/ubuntu/GitHub/python-tdd-book/venv/bin/ansible-playbook"
-    PLAYBOOK_LOC="/home/ubuntu/GitHub/python-tdd-book/deploy_superlists.yml"
-    time ssh_ec2_cmd "python --version"
+    time ssh_ec2_cmd "/bin/bash /home/ubuntu/GitHub/python-tdd-book/runtests.remote.sh"
     # time ssh_ec2_cmd "$REMOTE_ANSIBLE -i 'localhost,' -c local $PLAYBOOK_LOC"
     # time ansible-playbook -vvvvv -i ansible_inventory deploy_superlists.yml || fail
     fail
