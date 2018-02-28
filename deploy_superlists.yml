@@ -6,7 +6,7 @@
     include_vars: vault.yml
   - name: Get source from github dev branch
     git:
-      repo: 'git@superlists.peppyhare.uk:/Git/python-tdd-book.git'
+      repo: 'file:///Git/python-tdd-book.git'
       dest: /home/ubuntu/GitHub/python-tdd-book
       version: dev
       depth: 1
