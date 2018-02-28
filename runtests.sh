@@ -60,7 +60,7 @@ branchOff() {
 
 fullTest() {
     cd "$DIR" || fail
-    time ssh ubuntu@superlists.peppyhare.uk "/bin/bash -l /home/ubuntu/GitHub/python-tdd-book/runtests.remote.sh"
+    time ssh ubuntu@superlists.peppyhare.uk "/bin/bash -l /home/ubuntu/GitHub/python-tdd-book/runtests.remote.sh" || fail
 }
 
 commitCode() {
