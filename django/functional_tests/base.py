@@ -24,7 +24,6 @@ class FunctionalTest(StaticLiveServerTestCase):
         self.browser = self.get_webdriver()
 
     def tearDown(self):
-        self.browser.refresh()
         self.browser.quit()
 
     def wait(fn):

@@ -35,7 +35,7 @@ class LoginTest(FunctionalTest):
                         email_id = i
                         body = '\n'.join(lines)
                         return body
-                time.sleep(5)
+                time.sleep(1)
         finally:
             if email_id:
                 inbox.dele(email_id)
