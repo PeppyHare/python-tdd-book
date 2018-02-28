@@ -28,9 +28,12 @@ fail() {
 testSuperlists() {
 	source "$DIR"/.env
 	cd "$DIR/django" || fail
-    python manage.py test lists accounts \
-    && phantomjs lists/static/tests/runner.js lists/static/tests/tests.html \
-    && python manage.py test --failfast --parallel=8 functional_tests
+    printf "\033[32mRunning unit tests...\033[0m\n"
+    python manage.py test lists accounts || fail
+    printf "\033[32mRunning QUnit javascript tests...\033[0m\n"
+    phantomjs lists/static/tests/runner.js lists/static/tests/tests.html || fail
+    printf "\033[32mRunning local webdriver tests...\033[0m\n"
+    python manage.py test --failfast --parallel=8 functional_tests || fail
 }
 
 formatCode() {
