@@ -10,10 +10,10 @@
       dest: /home/ubuntu/GitHub/python-tdd-book
       version: dev
       depth: 1
-  - name: Configure environment
-    template:
-      src: env-template.j2
-      dest: /home/ubuntu/GitHub/python-tdd-book/.env
+  # - name: Configure environment
+  #   template:
+  #     src: env-template.j2
+  #     dest: /home/ubuntu/GitHub/python-tdd-book/.env
   - name: Build and deploy containers from source
     docker_service:
       build: yes
@@ -21,18 +21,21 @@
       state: present
       services: django
   - name: Collect static files into docker volume
-    docker_container:
-      image: pythontddbook_django
-      name: pythontddbook_collectstatic
-      auto_remove: yes
-      volumes:
-        pythontddbook_django-static:/app/static
-      command: /venv/bin/python /app/manage.py collectstatic --noinput
-  - name: Reset the database
-    docker_container:
-      image: pythontddbook_django
-      name: pythontddbook_resetdb
-      auto_remove: yes
-      volumes:
-        pythontddbook_django-db:/app/db
-      command: /venv/bin/python /app/manage.py flush --noinput
+    command:
+      chdir: /home/ubuntu/GitHub/python-tdd-book
+      
+  #   docker_container:
+  #     image: pythontddbook_django
+  #     name: pythontddbook_collectstatic
+  #     auto_remove: yes
+  #     volumes:
+  #       pythontddbook_django-static:/app/static
+  #     command: /venv/bin/python /app/manage.py collectstatic --noinput
+  # - name: Reset the database
+  #   docker_container:
+  #     image: pythontddbook_django
+  #     name: pythontddbook_resetdb
+  #     auto_remove: yes
+  #     volumes:
+  #       pythontddbook_django-db:/app/db
+  #     command: /venv/bin/python /app/manage.py flush --noinput
