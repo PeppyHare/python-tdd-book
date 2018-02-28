@@ -77,11 +77,11 @@ class FunctionalTest(StaticLiveServerTestCase):
             # options = Options()
             # options.add_argument("--headless")
             # browser = webdriver.Firefox(firefox_options=options)
-            browser = webdriver.PhantomJS(service_log_path='ghostdriver.log')
+            # browser = webdriver.PhantomJS(service_log_path='ghostdriver.log')
             # else:
-            # browser = webdriver.Remote(
-            #     command_executor="http://localhost:4444/wd/hub",
-            #     desired_capabilities=DesiredCapabilities.HTMLUNITWITHJS)
+            browser = webdriver.Remote(
+                command_executor="http://localhost:4444/wd/hub",
+                desired_capabilities=DesiredCapabilities.HTMLUNITWITHJS)
         return browser
 
     def get_item_input_box(self):
