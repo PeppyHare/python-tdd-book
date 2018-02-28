@@ -46,10 +46,11 @@ formatCode() {
 
 branchOff() {
     cd "$DIR" || fail
-    time git checkout dev
-    time git add .
-    time git status
-    time git commit -m "$COMMIT_MSG" && git push mirror dev
+    printf "\033[32mPushing changes to dev branch...\033[0m\n"
+    git checkout dev
+    git add .
+    git status
+    git commit -m "$COMMIT_MSG" && git push mirror dev
 }
 
 fullTest() {
@@ -77,7 +78,7 @@ commitCode() {
 printf "\n\033[32m$(date) :  Testing out new changes now :)\033[0m\n"
 testSuperlists || fail
 formatCode
-branchOff
+time branchOff
 fullTest || fail
 commitCode
 printf "\033[32mEverything's looking good :)\033[0m\n\n"
