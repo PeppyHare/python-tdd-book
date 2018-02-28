@@ -1,9 +1,9 @@
 ---
-- hosts: aws
+- hosts: all
   gather_facts: no
   tasks:
-  - name: Read secrets from ansible vault
-    include_vars: vault.yml
+  # - name: Read secrets from ansible vault
+    # include_vars: vault.yml
   - name: Get source from github dev branch
     git:
       repo: '/Git/python-tdd-book.git'

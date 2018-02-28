@@ -16,6 +16,10 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_outside_in.html"
 COMMIT_MSG="Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK"
 
+ssh_ec2_cmd() {
+    ssh ubuntu@superlists.peppyhare.uk "$1"
+}
+
 # startPyVenv() {
 #     source "$DIR/venv/bin/activate"
 # }
@@ -32,8 +36,8 @@ testSuperlists() {
     time python manage.py test lists accounts || fail
     printf "\033[32mRunning QUnit javascript tests...\033[0m\n"
     time phantomjs lists/static/tests/runner.js lists/static/tests/tests.html || fail
-    printf "\033[32mRunning local webdriver tests...\033[0m\n"
-    time python manage.py test --failfast --parallel=8 functional_tests || fail
+    # printf "\033[32mRunning local webdriver tests...\033[0m\n"
+    # time python manage.py test --failfast --parallel=8 functional_tests || fail
 }
 
 formatCode() {
@@ -55,7 +59,9 @@ branchOff() {
 
 fullTest() {
     cd "$DIR" || fail
-    time ansible-playbook -vvvvv -i ansible_inventory deploy_superlists.yml || fail
+    REMOTE_ANSIBLE="/home/ubuntu/GitHub/python-tdd-book/venv/bin/ansible-playbook"
+    time ssh_ec2_cmd "$REMOTE_ANSIBLE -i 'localhost,' -c local deploy_superlists.yml"
+    # time ansible-playbook -vvvvv -i ansible_inventory deploy_superlists.yml || fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
     cd "$DIR/django" || fail
     printf "\033[32mRunning full FTs against live server...\033[0m\n"
@@ -77,7 +83,7 @@ commitCode() {
 
 printf "\n\033[32m$(date) :  Testing out new changes now :)\033[0m\n"
 testSuperlists || fail
-formatCode
+time formatCode
 time branchOff
 fullTest || fail
 commitCode
