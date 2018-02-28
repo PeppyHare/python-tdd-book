@@ -37,25 +37,19 @@ testSuperlists() {
     time python manage.py test lists accounts || fail
     printf "\033[32mRunning QUnit javascript tests...\033[0m\n"
     time phantomjs lists/static/tests/runner.js lists/static/tests/tests.html || fail
-    # printf "\033[32mRunning local webdriver tests...\033[0m\n"
-    # time python manage.py test --failfast --parallel=8 functional_tests || fail
 }
 
 formatCode() {
     cd "$DIR/django" || fail
     printf "\033[32mApplying yapf...\033[0m\n"
-    python -m yapf -i -r ./superlists
-    python -m yapf -i -r ./lists
-    python -m yapf -i -r ./functional_tests
+    python -m yapf -i -p -r ./superlists ./lists ./functional_tests
 }
 
 branchOff() {
     cd "$DIR" || fail
     printf "\033[32mPushing changes to dev branch...\033[0m\n"
     git checkout dev
-    git add .
-    git status
-    git commit -m "$COMMIT_MSG" && git push mirror dev
+    git commit -am "$COMMIT_MSG" && git push mirror dev
 }
 
 fullTest() {
