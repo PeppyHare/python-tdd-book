@@ -1,3 +1,4 @@
 django==1.11
 selenium<4
 gunicorn
+django-cprofile-middleware
