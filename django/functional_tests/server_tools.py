@@ -28,9 +28,9 @@ def create_session_on_server(host, email):
     with settings(
             hide('warnings', 'running', 'stdout', 'stderr'),
             host_string=f'localhost'):
-        env_vars = _get_server_env_vars()
-        with shell_env(**env_vars):
-            session_key = run(
-                f'docker-compose -f /home/ubuntu/GitHub/python-tdd-book/docker-compose.yml exec django /venv/bin/python /app/manage.py create_session {email}'
-            )
-            return session_key.strip()
+        # env_vars = _get_server_env_vars()
+        # with shell_env(**env_vars):
+        session_key = run(
+            f'docker-compose -f /home/ubuntu/GitHub/python-tdd-book/docker-compose.yml exec django /venv/bin/python /app/manage.py create_session {email}'
+        )
+        return session_key.strip()
