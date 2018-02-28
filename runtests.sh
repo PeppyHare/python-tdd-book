@@ -47,7 +47,7 @@ branchOff() {
     git checkout dev
     git add .
     git status
-    git commit -m "$COMMIT_MSG" && git push origin dev
+    git commit -m "$COMMIT_MSG" && git push mirror dev
 }
 
 fullTest() {
@@ -64,8 +64,8 @@ commitCode() {
     git stash | grep -q "No local changes"
     no_stash=$?
     git checkout master
-    git pull origin dev
-    git push origin master
+    git pull mirror dev
+    git push mirror master
     git checkout dev
     if [ $no_stash -gt 0 ]; then
         git stash pop
