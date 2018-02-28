@@ -4,6 +4,7 @@ source "$DIR"/venv/bin/activate
 
 fail() {
 	printf "\033[31Not passing tests... :(\033[0m\n"
+	exit 1
 }
 
 printf "\033[32mUpdating source from git...\033[0m\n"
