@@ -61,7 +61,7 @@ fullTest() {
     cd "$DIR" || fail
     REMOTE_ANSIBLE="/home/ubuntu/GitHub/python-tdd-book/venv/bin/ansible-playbook"
     PLAYBOOK_LOC="/home/ubuntu/GitHub/python-tdd-book/deploy_superlists.yml"
-    time ssh_ec2_cmd "$REMOTE_ANSIBLE -i 'localhost,' -c local deploy_superlists.yml"
+    time ssh_ec2_cmd "$REMOTE_ANSIBLE -i 'localhost,' -c local $PLAYBOOK_LOC"
     # time ansible-playbook -vvvvv -i ansible_inventory deploy_superlists.yml || fail
     fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
