@@ -16,4 +16,4 @@ time ansible-playbook -i 'localhost,' -c local --extra-vars "ansible_python_inte
 
 printf "\033[32mRunning full FTs against live server...\033[0m\n"
 export STAGING_SERVER=superlists-staging.peppyhare.uk
-time python "$DIR/manage.py" test --keepdb --failfast --parallel=8 functional_tests || fail
+time python "$DIR/django/manage.py" test --keepdb --failfast --parallel=8 functional_tests || fail
