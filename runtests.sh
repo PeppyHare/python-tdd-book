@@ -62,7 +62,7 @@ fullTest() {
     cd "$DIR" || fail
     time ssh ubuntu@superlists.peppyhare.uk "/bin/bash -l /home/ubuntu/GitHub/python-tdd-book/runtests.remote.sh" || fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
-    time python manage.py test --failfast --parallel=8 functional_tests || fail
+    time python "$DIR/django/manage.py" test --failfast --parallel=8 functional_tests || fail
 }
 
 commitCode() {
