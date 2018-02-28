@@ -82,7 +82,7 @@ class FunctionalTest(StaticLiveServerTestCase):
             # else:
             # browser = webdriver.Remote(
             #     command_executor="http://localhost:4444/wd/hub",
-            #     desired_capabilities=DesiredCapabilities.HTMLUNITWITHJS)
+            #     desired_capabilities=DesiredCapabilities.PHANTOMJS)
         return browser
 
     def get_item_input_box(self):
