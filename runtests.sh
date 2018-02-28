@@ -60,7 +60,7 @@ branchOff() {
 
 fullTest() {
     cd "$DIR" || fail
-    time ssh_ec2_cmd "/bin/bash /home/ubuntu/GitHub/python-tdd-book/runtests.remote.sh"
+    time ssh_ec2_cmd "/home/ubuntu/GitHub/python-tdd-book/runtests.remote.sh"
     # time ssh_ec2_cmd "$REMOTE_ANSIBLE -i 'localhost,' -c local $PLAYBOOK_LOC"
     # time ansible-playbook -vvvvv -i ansible_inventory deploy_superlists.yml || fail
     fail
