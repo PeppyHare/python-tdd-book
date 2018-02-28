@@ -21,7 +21,7 @@
       state: present
       services: django
   - name: Collect static files into docker volume
-    command: docker run --rm -v pythontddbook_django-static:/app/static --name pythontddbook_collectstatic pythontddbook_django /venv/bin/python /app/manage.py collectstatic --noinput && docker run --rm -v pythontddbook_django-db:/app/db --name pythontddbook_resetdb pythontddbook_django /venv/bin/python /app/manage.py flush --noinput
+    command: docker run --rm -v pythontddbook_django-static:/app/static --name pythontddbook_collectstatic pythontddbook_django /venv/bin/python /app/manage.py collectstatic --noinput; docker run --rm -v pythontddbook_django-db:/app/db --name pythontddbook_resetdb pythontddbook_django /venv/bin/python /app/manage.py flush --noinput
 
   #   docker_container:
   #     image: pythontddbook_django
