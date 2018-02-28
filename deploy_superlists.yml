@@ -10,7 +10,7 @@
       dest: /home/ubuntu/GitHub/python-tdd-book
       version: dev
       depth: 1
-  # - name: Configure environment
+  # - name: Configure environment, only necessary on the first run
   #   template:
   #     src: env-template.j2
   #     dest: /home/ubuntu/GitHub/python-tdd-book/.env
@@ -20,6 +20,7 @@
       project_src: /home/ubuntu/GitHub/python-tdd-book
       state: present
       services: django
+  # Use nasty command modules here for a bit more speed compared to docker_container
   - name: Collect static files into docker volume
     command: docker run --rm -v pythontddbook_django-static:/app/static --name pythontddbook_collectstatic pythontddbook_django /venv/bin/python /app/manage.py collectstatic --noinput
   - name: Reset the database
