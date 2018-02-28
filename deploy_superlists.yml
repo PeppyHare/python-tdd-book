@@ -4,12 +4,12 @@
   tasks:
   # - name: Read secrets from ansible vault
     # include_vars: vault.yml
-  - name: Get source from github dev branch
-    git:
-      repo: '/Git/python-tdd-book.git'
-      dest: /home/ubuntu/GitHub/python-tdd-book
-      version: dev
-      depth: 1
+  # - name: Get source from github dev branch
+  #   git:
+  #     repo: '/Git/python-tdd-book.git'
+  #     dest: /home/ubuntu/GitHub/python-tdd-book
+  #     version: dev
+  #     depth: 1
   # - name: Configure environment, only necessary on the first run
   #   template:
   #     src: env-template.j2
