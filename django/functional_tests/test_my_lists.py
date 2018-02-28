@@ -13,7 +13,7 @@ class MyListsTest(FunctionalTest):
 
     def create_pre_authenticated_session(self, email):
         if self.staging_server:
-            session_key = create_session_on_server('localhost', email)
+            session_key = create_session_on_server('self.staging_server', email)
             domain = urlparse(self.live_server_url).netloc.split(':')[0]
         else:
             session_key = create_pre_authenticated_session(email)
