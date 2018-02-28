@@ -18,7 +18,7 @@ COMMIT_MSG="Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK"
 EC2_VENV="/home/ubuntu/GitHub/python-tdd-book/venv"
 
 ssh_ec2_cmd() {
-    ssh ubuntu@superlists.peppyhare.uk /bin/bash  "source $EC2_VENV/bin/activate && $1"
+    ssh ubuntu@superlists.peppyhare.uk /bin/bash source $EC2_VENV/bin/activate && $1
 }
 
 # startPyVenv() {
