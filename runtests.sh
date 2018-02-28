@@ -15,9 +15,10 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_outside_in.html"
 COMMIT_MSG="Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK"
+EC2_VENV="/home/ubuntu/GitHub/python-tdd-book/venv"
 
 ssh_ec2_cmd() {
-    ssh ubuntu@superlists.peppyhare.uk "$1"
+    ssh ubuntu@superlists.peppyhare.uk "source $EC2_VENV/bin/activate && $1"
 }
 
 # startPyVenv() {
