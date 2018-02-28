@@ -29,11 +29,11 @@ testSuperlists() {
 	source "$DIR"/.env
 	cd "$DIR/django" || fail
     printf "\033[32mRunning unit tests...\033[0m\n"
-    python manage.py test lists accounts || fail
+    time python manage.py test lists accounts || fail
     printf "\033[32mRunning QUnit javascript tests...\033[0m\n"
-    phantomjs lists/static/tests/runner.js lists/static/tests/tests.html || fail
+    time phantomjs lists/static/tests/runner.js lists/static/tests/tests.html || fail
     printf "\033[32mRunning local webdriver tests...\033[0m\n"
-    python manage.py test --failfast --parallel=8 functional_tests || fail
+    time python manage.py test --failfast --parallel=8 functional_tests || fail
 }
 
 formatCode() {
@@ -46,19 +46,19 @@ formatCode() {
 
 branchOff() {
     cd "$DIR" || fail
-    git checkout dev
-    git add .
-    git status
-    git commit -m "$COMMIT_MSG" && git push mirror dev
+    time git checkout dev
+    time git add .
+    time git status
+    time git commit -m "$COMMIT_MSG" && git push mirror dev
 }
 
 fullTest() {
     cd "$DIR" || fail
-    ansible-playbook -i ansible_inventory deploy_superlists.yml || fail
+    time ansible-playbook -i ansible_inventory deploy_superlists.yml || fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
     cd "$DIR/django" || fail
     printf "\033[32mRunning full FTs against live server...\033[0m\n"
-    python manage.py test --keepdb --failfast --parallel=8 functional_tests
+    time python manage.py test --keepdb --failfast --parallel=8 functional_tests
 }
 
 commitCode() {
