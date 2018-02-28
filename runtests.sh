@@ -52,7 +52,7 @@ branchOff() {
 
 fullTest() {
     cd "$DIR" || fail
-    ansible-playbook -i ansible_inventory deploy_superlists.yml || fail
+    ansible-playbook -i ansible_inventory -vvvv deploy_superlists.yml || fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
     cd "$DIR/django" || fail
     printf "\033[32mRunning full FTs against live server...\033[0m\n"
