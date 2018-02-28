@@ -62,6 +62,7 @@ fullTest() {
     REMOTE_ANSIBLE="/home/ubuntu/GitHub/python-tdd-book/venv/bin/ansible-playbook"
     time ssh_ec2_cmd "$REMOTE_ANSIBLE -i 'localhost,' -c local deploy_superlists.yml"
     # time ansible-playbook -vvvvv -i ansible_inventory deploy_superlists.yml || fail
+    fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
     cd "$DIR/django" || fail
     printf "\033[32mRunning full FTs against live server...\033[0m\n"
