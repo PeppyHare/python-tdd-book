@@ -19,6 +19,7 @@
       build: yes
       project_src: /home/ubuntu/GitHub/python-tdd-book
       state: present
+      services: django
   - name: Collect static files into docker volume
     docker_container:
       image: pythontddbook_django

@@ -25,15 +25,6 @@ RUN set -ex \
   	# && apk del .build-deps
   	&& echo "install done"
 
-RUN mkdir -p /app/db
-WORKDIR /app/
-ADD . /app/
-VOLUME /app/db
-
-# Set up Django stuff
-RUN /venv/bin/python /app/manage.py migrate --noinput
-RUN /venv/bin/python /app/manage.py collectstatic --noinput
-
 # Listen on this port
 EXPOSE 8000
 
@@ -43,3 +34,14 @@ ENV GUNICORN_CMD_ARGS="--bind=0.0.0.0 --workers=3"
 # Do the thing
 # CMD ["python3.6","/app/manage.py","runserver","0.0.0.0:8000"]
 CMD ["/venv/bin/gunicorn", "superlists.wsgi:application"]
+
+RUN mkdir -p /app/db
+WORKDIR /app/
+ADD . /app/
+VOLUME /app/db
+
+# Set up Django stuff
+RUN /venv/bin/python /app/manage.py migrate --noinput
+RUN /venv/bin/python /app/manage.py collectstatic --noinput
+
+
