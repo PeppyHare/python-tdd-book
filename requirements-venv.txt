@@ -3,4 +3,4 @@ selenium<4
 gunicorn
 docker-compose
 fabric3
-tbliv
+tblib
