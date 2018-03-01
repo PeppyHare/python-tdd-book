@@ -56,7 +56,7 @@ fullTest() {
     cd "$DIR" || fail
     ssh ubuntu@superlists.peppyhare.uk "/bin/bash -l /home/ubuntu/GitHub/python-tdd-book/runtests.remote.sh" || fail
     export STAGING_SERVER=superlists-staging.peppyhare.uk
-    python "$DIR/django/manage.py" test --keepdb --failfast --parallel=8 -v 3 functional_tests || fail
+    python "$DIR/django/manage.py" test --keepdb --failfast --parallel=8 functional_tests || fail
 }
 
 commitCode() {
