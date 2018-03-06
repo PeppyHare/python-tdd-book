@@ -8,7 +8,7 @@
   <div class="row" id="id_list_table">
     {% for item in list.item_set.all %}
     <div class="card-panel orange lighten-4">
-    	<a class="btn-floating right waves-effect waves-light red"><i class="material-icons">close</i></a>
+    	<a class="btn-floating right waves-effect waves-light grey"><i class="material-icons">close</i></a>
     	<div class="card-content list-view">{{ forloop.counter }}: {{ item.text }}
     	</div>
     </div>
