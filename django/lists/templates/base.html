@@ -27,7 +27,7 @@
                         <li><a href="{% url 'my_lists' user.email %}">My lists</a></li>
                         <li class="navbar-text">Logged in as {{ user.email }}
                         </li>
-                        <li><a href="{% url 'logout' %}">Log out</a></li>
+                        <li><a id="logout_link" href="{% url 'logout' %}">Log out</a></li>
                     </ul>
                     {% else %}
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
