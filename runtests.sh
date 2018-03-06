@@ -37,6 +37,9 @@ testSuperlists() {
     python manage.py test lists accounts || fail
     printf "\033[32mRunning QUnit javascript tests...\033[0m\n"
     phantomjs lists/static/tests/runner.js lists/static/tests/tests.html || fail
+    printf "\033[32mRunning Selenium FTs...\033[0m\n"
+    python manage.py test functional_tests --failfast --parallel=8 || fail
+
 }
 
 formatCode() {
