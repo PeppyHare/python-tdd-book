@@ -12,5 +12,5 @@ main {
 }
 
 .card {
-	display: inline-block;
+	display: flex;
 }
