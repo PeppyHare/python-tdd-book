@@ -11,6 +11,10 @@ main {
 	flex: 1 0 auto;
 }
 
-.card {
+.card-panel {
 	display: flex;
+}
+
+.card-content {
+	font-size: 1.5em;
 }

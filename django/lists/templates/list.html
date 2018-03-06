@@ -5,12 +5,11 @@
 {% block form_action %}{% url 'view_list' list.id %}{% endblock %}
 
 {% block table %}
-  <div class="col" id="id_list_table">
+  <div class="row" id="id_list_table">
   <!-- <table id="id_list_table" class="table"> -->
     {% for item in list.item_set.all %}
-    <div class="card orange lighten-3">
-    	<span class="card-title">{{ forloop.counter }}</span>
-    	<div class="card-content"><div class="container">{{ item.text }}</div></div>
+    <div class="card-panel orange lighten-3">
+    	<div class="card-content">{{ forloop.counter }}: {{ item.text }}</div>
     </div>
       <!-- <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr> -->
     {% endfor %}
