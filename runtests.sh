@@ -14,7 +14,7 @@
 # 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_outside_in.html"
-COMMIT_MSG="Automated commit from passing tests. Now on $CURRENT_CHAPTER_LINK"
+COMMIT_MSG="Playing around with page styling and css"
 EC2_VENV="/home/ubuntu/GitHub/python-tdd-book/venv"
 
 ssh_ec2_cmd() {
