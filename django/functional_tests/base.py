@@ -50,7 +50,7 @@ class FunctionalTest(StaticLiveServerTestCase):
         while True:
             try:
                 table = self.browser.find_element_by_id('id_list_table')
-                rows = table.find_elements_by_tag_name('tr')
+                rows = table.find_elements_by_tag_name('span')
                 self.assertIn(row_text, [row.text for row in rows])
                 return
             except (AssertionError, WebDriverException) as e:
@@ -89,7 +89,8 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def add_list_item(self, item_text):
         num_rows = len(
-            self.browser.find_elements_by_css_selector('#id_list_table tr'))
+            self.browser.find_elements_by_css_selector(
+                '#id_list_table .card-panel'))
         self.get_item_input_box().send_keys(item_text)
         self.get_item_input_box().send_keys(Keys.ENTER)
         item_number = num_rows + 1
