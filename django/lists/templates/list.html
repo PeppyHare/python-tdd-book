@@ -7,12 +7,10 @@
 {% block table %}
   <div class="row" id="id_list_table">
     {% for item in list.item_set.all %}
-    <div class="row">
-    <div class="card-panel orange lighten-4">
+    <div class="card orange lighten-4">
+		<a class="btn-floating halfway-fab waves-effect waves-light grey"><i class="material-icons">close</i></a>
     	<div class="card-content list-view">{{ forloop.counter }}: {{ item.text }}
-    	</div>
     </div>
-	<a class="btn-floating right waves-effect waves-light grey"><i class="material-icons">close</i></a>
 	</div>
     {% endfor %}
   </table>
