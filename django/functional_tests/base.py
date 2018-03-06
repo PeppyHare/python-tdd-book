@@ -45,16 +45,19 @@ class FunctionalTest(StaticLiveServerTestCase):
         return fn()
 
     @wait
-    def wait_for_row_in_list_table(self, row_text):
+    def wait_for_row_in_list_table(self, card_idx, card_text):
         start_time = time.time()
         while True:
             try:
                 table = self.browser.find_element_by_id('id_list_table')
-                rows = table.find_elements_by_tag_name('span')
-                self.assertIn(row_text, [row.text for row in rows])
+                sep = '\n'    # Page separator between idx and content
+                rows = table.find_elements_by_css_selector('.card')
+                self.assertIn(
+                    sep.join([card_idx, card_text]), [row.text for row in rows])
                 return
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > MAX_WAIT:
+                    self.browser.quit()
                     raise e
                 time.sleep(0.1)
 
@@ -89,9 +92,8 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def add_list_item(self, item_text):
         num_rows = len(
-            self.browser.find_elements_by_css_selector(
-                '#id_list_table .card-panel'))
+            self.browser.find_elements_by_css_selector('#id_list_table .card'))
         self.get_item_input_box().send_keys(item_text)
         self.get_item_input_box().send_keys(Keys.ENTER)
         item_number = num_rows + 1
-        self.wait_for_row_in_list_table(f'{item_number}: {item_text}')
+        self.wait_for_row_in_list_table(str(item_number), item_text)
