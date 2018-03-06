@@ -18,6 +18,7 @@ class ItemForm(forms.models.ModelForm):
                 attrs={
                     'placeholder': 'Enter a to-do item',
                     'class': 'form-control input-lg',
+                    'autofocus': 'autofocus'
                 }),
         }
         error_messages = {'text': {'required': EMPTY_ITEM_ERROR}}
