@@ -8,8 +8,9 @@
   <div class="col" id="id_list_table">
   <!-- <table id="id_list_table" class="table"> -->
     {% for item in list.item_set.all %}
-    <div class="card-panel orange lighten-3">
-    	<span>{{ forloop.counter }}: {{ item.text }}<span>
+    <div class="card orange lighten-3">
+    	<span class="card-title">{{ forloop.counter }}</span>
+    	<div class="card-content"><p>{{ item.text }}</p></div>
     </div>
       <!-- <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr> -->
     {% endfor %}

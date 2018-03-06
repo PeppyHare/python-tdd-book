@@ -11,6 +11,6 @@ main {
 	flex: 1 0 auto;
 }
 
-/*.card-panel {
+.card {
 	display: inline-block;
-}*/
+}
