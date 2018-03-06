@@ -15,6 +15,10 @@ main {
 	display: flex;
 }
 
-.card-content {
+.list-view {
 	font-size: 1.5em;
+}
+
+.list-interior {
+	display: inline;
 }

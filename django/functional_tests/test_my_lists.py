@@ -46,10 +46,13 @@ class MyListsTest(FunctionalTest):
         self.browser.find_element_by_link_text('My lists').click()
 
         # She sees that her list is in there, named according to its first list item
+        import pdb
+        pdb.set_trace()
         self.wait_for(
-            lambda: self.browser.find_element_by_link_text('Reticulate splines')
+            lambda: self.browser.find_element_by_partial_link_text('Reticulate splines')
         )
-        self.browser.find_element_by_link_text('Reticulate splines').click()
+        self.browser.find_element_by_partial_link_text(
+            'Reticulate splines').click()
         self.wait_for(
             lambda: self.assertEqual(self.browser.current_url, first_list_url))
 
@@ -61,8 +64,9 @@ class MyListsTest(FunctionalTest):
         # Under "my lists" her new list appears
         self.browser.find_element_by_link_text('My lists').click()
         self.wait_for(
-            lambda: self.browser.find_element_by_link_text('Click cows'))
-        self.browser.find_element_by_link_text('Click cows').click()
+            lambda: self.browser.find_element_by_partial_link_text('Click cows')
+        )
+        self.browser.find_element_by_partial_link_text('Click cows').click()
         self.wait_for(
             lambda: self.assertEqual(self.browser.current_url, second_list_url))
 
