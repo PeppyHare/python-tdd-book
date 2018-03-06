@@ -46,8 +46,6 @@ class MyListsTest(FunctionalTest):
         self.browser.find_element_by_link_text('My lists').click()
 
         # She sees that her list is in there, named according to its first list item
-        import pdb
-        pdb.set_trace()
         self.wait_for(
             lambda: self.browser.find_element_by_partial_link_text('Reticulate splines')
         )
