@@ -6,7 +6,14 @@
 
 {% block table %}
   <div class="row" id="id_list_table">
+  	<ul class="collection with-header">
+  		<li class="collection-header light-blue lighten-2">
+  			<h4 class="task-card-title">List #{{ list.id }}</h4>
+  		</li>
     {% for item in list.item_set.all %}
+    <li class="collection-item dismissable" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+    	<input type="checkbox" id="task{{ task.id }}">
+    	<label for="task{{ task.id }}" style="text-decoration: none;">
     <div class="card orange lighten-4">
 		<a class="btn-floating halfway-fab waves-effect waves-light grey"><i class="material-icons">close</i></a>
     	<div class="card-content list-view">{{ forloop.counter }}: {{ item.text }}
