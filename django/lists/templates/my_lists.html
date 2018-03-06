@@ -8,7 +8,7 @@
 <!-- <h2>{{ owner.email }}'s lists</h2> -->
 {% for list in owner.list_set.all %}
     <!-- <li><a href="{{ list.get_absolute_url }}">{{ list.name }}</a></li> -->
-<a href="{{ list.get_absolute_url }}" class="card orange lighten-4 black-text" style="display:flex;">
+<a href="{{ list.get_absolute_url }}" class="card orange lighten-4 black-text hoverable" style="display:flex;">
 	<div class="card-content">
 		<span class="card-title">{{ list.name }}</span>
 		{% for item in list.item_set.all %}
