@@ -125,6 +125,15 @@
 
 $(document).ready(function () {
   window.Superlists.initialize();
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.level_tag == 'success' %}
+      Materialize.toast('{{ message }}', 3000, 'rounded alert alert-success');
+      {% else %}
+      Materialize.toast('{{ message }}', 3000, 'rounded alert alert-warning');
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 });
 
         </script>
