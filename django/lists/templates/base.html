@@ -43,7 +43,7 @@
                 </div>
             </nav>
         </header>
-
+        <main>
             {% if messages %}
             <div class="row">
                 <div class="col-md-8">
@@ -57,40 +57,66 @@
                 </div>
             </div>
             {% endif %}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3 jumbotron">
-                    <div class="text-center">
-                        <h1>{% block header_text %}{% endblock %}</h1>
-                        {% block list_form %}
-                        <form method="POST" action="{% block form_action %}{% endblock %}">
-                            {{ form.text }}
-                            {% csrf_token %}
-                            {% if form.errors %}
-                            <div class="form-group has-error">
-                                <div class="help-block">{{ form.text.errors }}</div>
-                            </div>
-                            {% endif %}
-                        </form>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 jumbotron">
+                        <div class="text-center">
+                            <h1>{% block header_text %}{% endblock %}</h1>
+                            {% block list_form %}
+                            <form method="POST" action="{% block form_action %}{% endblock %}">
+                                {{ form.text }}
+                                {% csrf_token %}
+                                {% if form.errors %}
+                                <div class="form-group has-error">
+                                    <div class="help-block">{{ form.text.errors }}</div>
+                                </div>
+                                {% endif %}
+                            </form>
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        {% block table %}
+                        {% endblock %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        {% block extra_content %}
                         {% endblock %}
                     </div>
                 </div>
             </div>
-
+        </main>
+        <footer class="page-footer">
+            <div class="container">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    {% block table %}
-                    {% endblock %}
+                <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
                 </div>
+                <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
             </div>
-
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    {% block extra_content %}
-                    {% endblock %}
-                </div>
             </div>
-        </div>
+            </div>
+            <div class="footer-copyright">
+            <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+            </div>
+        </footer>
         <script src="/static/jquery-3.3.1.min.js"></script>
         <script src="/static/list.js"></script>
 
@@ -103,29 +129,5 @@ $(document).ready(function () {
         </script>
     </body>
 
-    <footer class="page-footer">
-        <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-            <h5 class="white-text">Footer Content</h5>
-            <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Links</h5>
-            <ul>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-            </ul>
-</div>
-        </div>
-        </div>
-        <div class="footer-copyright">
-        <div class="container">
-        © 2014 Copyright Text
-        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-        </div>
-        </div>
-    </footer>
+
 </html>
