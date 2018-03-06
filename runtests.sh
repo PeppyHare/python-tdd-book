@@ -51,7 +51,8 @@ branchOff() {
     cd "$DIR" || fail
     printf "\033[32mPushing changes to dev branch...\033[0m\n"
     git checkout dev
-    git commit -am "$COMMIT_MSG" && git push mirror dev
+    git add .
+    git commit -m "$COMMIT_MSG" && git push mirror dev
 }
 
 fullTest() {
