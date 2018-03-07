@@ -22,3 +22,48 @@ main {
 .list-interior {
 	display: inline;
 }
+
+/* task card */
+#id_list_table label {
+  display: block;
+  color: rgba(0, 0, 0, 0);
+  height: auto;
+}
+
+#id_list_table .task-card-title {
+  margin: 0;
+  color: #fff;
+  font-weight: 300;
+}
+
+#id_list_table .task-card-date {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #fff;
+}
+
+#id_list_table .collection-header {
+  padding: 20px;
+}
+
+#id_list_table .task-add {
+  position: absolute;
+  right: 10px;
+  top: 76px;
+}
+
+#id_list_table .task-cat {
+  padding: 2px 4px;
+  color: #fff;
+  margin-left: 37px;
+  font-weight: 300;
+  font-size: 1.2rem;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background-clip: padding-box;
+}
+
+.collection .collection-item.avatar i.circle {
+  font-size: 28px;
+}

@@ -13,7 +13,11 @@
 		<span class="card-title">{{ list.name }}</span>
 		{% for item in list.item_set.all %}
 			<div class="card orange lighten-3" style="display:inline-flex; margin-right: 20px;">
+				{% if item.state %}
 				<div class="card-content list-interior">{{ item.text }}</div>
+				{% else %}
+				<div class="card-content list-interior" style="text-decoration: line-through; color: #939393;">{{ item.text }}</div>
+				{% endif %}
 			</div>
 		{% endfor %}
 	</div>

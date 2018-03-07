@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 
-{% block header_text %}Your To-Do list{% endblock %}
+{% block header_text %}List #{{ list.id }}{% endblock %}
 
 {% block form_action %}{% url 'view_list' list.id %}{% endblock %}
 
 {% block table %}
-  <div class="row" id="id_list_table">
-  	<ul class="collection with-header">
-  		<li class="collection-header light-blue lighten-2">
-  			<h4 class="task-card-title">List #{{ list.id }}</h4>
-  		</li>
+<div class="container" id="id_list_table">
     {% for item in list.item_set.all %}
-    <li class="collection-item dismissable" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-    	<input type="checkbox" id="task{{ task.id }}">
-    	<label for="task{{ task.id }}" style="text-decoration: none;">
-    <div class="card orange lighten-4">
-		<a class="btn-floating halfway-fab waves-effect waves-light grey"><i class="material-icons">close</i></a>
-    	<div class="card-content list-view">{{ forloop.counter }}: {{ item.text }}
-    </div>
-	</div>
-    {% endfor %}
-  </table>
+    <div class="card orange lighten-4 dismissable" style="touch-action: pan-y;">
+    	<div class="card-content list-view">
+    		{% if item.state %}
+	    	<input type="checkbox" id="item{{ item.id }}" itemid="{{ item.id }}">
+	    	{% else %}
+	    	<input type="checkbox" id="item{{ item.id }}" itemid="{{ item.id }}" checked>
+	    	{% endif %}
+	    	<label for="item{{ item.id }}">
+	    		{{ forloop.counter }}: {{ item.text }}
+	    	</label>
+	    </div>
+    </div>  
+	{% endfor %}
+</div>
 {% endblock %}

@@ -51,7 +51,8 @@ class FunctionalTest(StaticLiveServerTestCase):
             try:
                 table = self.browser.find_element_by_id('id_list_table')
                 sep = ': '    # Page separator between idx and content
-                rows = table.find_elements_by_css_selector('.card-content')
+                rows = table.find_elements_by_css_selector(
+                    '#id_list_table label')
                 self.assertIn(
                     sep.join([card_idx, card_text]), [row.text for row in rows])
                 return

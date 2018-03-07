@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from lists.models import Item, List
 from lists.forms import ItemForm, ExistingListItemForm, NewListForm
 from django.contrib.auth import get_user_model
+from django.http import HttpResponse
 User = get_user_model()
 
 
@@ -32,3 +33,18 @@ def new_list(request):
 def my_lists(request, email):
     owner = User.objects.get(email=email)
     return render(request, 'my_lists.html', {'owner': owner})
+
+
+def update_item(request, item_id):
+    item_ = Item.objects.get(id=item_id)
+    if request.method == 'GET':
+        new_state = request.GET['state']
+        if new_state == 'inactive':
+            item_.state = False
+            item_.save()
+        elif new_state == 'active':
+            item_.state = True
+            item_.save()
+        else:
+            return HttpResponse(status=400)
+    return HttpResponse()
