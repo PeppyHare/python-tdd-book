@@ -1,20 +1,20 @@
 #!/bin/bash -x
-# 
+#
 # The object of this is to
 #  - format all source files with https://github.com/google/yapf
 #  - quickly run all specified tests when a file changes
 #  - push the code to some staging environment and run FT against it
 #  - create a new git commit if all of the tests are passing :white_check_mark:
-# 
+#
 # In general, while working on the project, I use http://entrproject.org/ to run the tests passively while I make changes. From this working directory, I can run:
-# 
+#
 # $ ag -l | entr -d bash "$DIR/runtests.sh"
-# 
+#
 # This will watch for any file modifications in the project, and re-run the tests (and possibly commit the code) when they occur (wow such TDD)
-# 
+#
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CURRENT_CHAPTER_LINK="https://www.obeythetestinggoat.com/book/chapter_outside_in.html"
-COMMIT_MSG="Playing around with page styling and css"
+COMMIT_MSG="Working on the login alerts button"
 EC2_VENV="/home/ubuntu/GitHub/python-tdd-book/venv"
 
 ssh_ec2_cmd() {
