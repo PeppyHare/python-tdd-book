@@ -68,7 +68,7 @@ main {
   font-size: 28px;
 }
 
-#toast-container {
+.toast {
     left: 3%;
     right: unset;
 }
