@@ -67,3 +67,9 @@ main {
 .collection .collection-item.avatar i.circle {
   font-size: 28px;
 }
+
+#toast-container {
+    left: 3%;
+    right: unset;
+}
+
